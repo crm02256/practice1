@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Result</title>
+        <style>
+            h1, table {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+        </style>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    </head>
+    <body>
+        <h1>Result</h1>
+        <script>
+            var paramsList = location.search.substring(1).split("&");
+            //url에서 처음부터 '?'까지 삭제하고 '&'을 기준으로 분리한다.
+            //var code = paramsFunc("code");
+
+            function paramsFunc(paramsNum) {
+                for(var i=0;i<paramsList.length;i++) {
+                    //returnva paramsList[i].split("=")[1];
+                    var paramValue = paramsList[i].split('=');
+                    // '='을 기준으로 분리하기
+                
+                    if(paramValue[0] == paramsNum) { 
+                        // paramsList[0] = 파라미터 명
+                        return paramValue[1]; 
+                        // paramsList[1] = 파라미터 값
+                    }
+                }
+            }
+
+            var data1, data2, data3, data4, data5;
+            data1 = parseInt(paramsFunc('volume'));
+            data2 = parseInt(paramsFunc('time'));
+            data3 = 999; //아두이노에서 받아오는 데이터 값
+            data4 = (data1)*(20/data2); 
+            data5 = ((data3-data4)/data4)*100;
+
+            document.write("<table border='1'>");
+            document.write("<tr>");
+            document.write("<td>" + "Total Injection Volume[mL]" + "</td>");
+            document.write("<td>" + "Total Injection Time[Hour]" + "</td>");
+            document.write("<td>" + "gtt[gtt/min]" + "</td>");
+            document.write("<td>" + "Data[gtt/min]" + "</td>");
+            document.write("<td>" + "Error" + "</td>");
+            document.write("</tr>");
+            document.write("<tr>");
+            document.write("<td>" + data1 + "</td>");
+            document.write("<td>" + data2 + "</td>");
+            document.write("<td>" + data3 + "</td>");
+            document.write("<td>" + data4 + "</td>");
+            document.write("<td>" + data5 + "</td>");
+            document.write("</tr>");
+            document.write("</table>");
+        </script>
+    </body>
+</html>
